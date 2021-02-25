@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+<head>
+  {% block title %} <title> Home page</title> {% endblock %}
+</head>
+{% block content %}
+  {% load static %}
+  <h1>Lokal Library </h1><br>
+  <p>Welcome to Local Library, a website developed by <em>Tech jargons</em>!</p><br>
+  	<div style=" margin-bottom:50px;">
+<p>  Currently you can find  {{ num_books }} <a href="{% url 'books' %}"> books </a> in {{num_genre }}  categories  written by  {{ num_authors}} <a href="{% url 'authors' %}">authors</a> in {{num_langs}} languages.</p>
+	</div>
+
+<div style=" margin-bottom:50px;">
+		<p>{% if num_visits == 0 %} You may visit first time here  !!!!!{% else %} You have visited this page {{num_visits}}{% if num_visits == 1 %} time{% else %} times{% endif %}.{% endif %}</p>
+	</div>
+</div>
+{% endblock %}

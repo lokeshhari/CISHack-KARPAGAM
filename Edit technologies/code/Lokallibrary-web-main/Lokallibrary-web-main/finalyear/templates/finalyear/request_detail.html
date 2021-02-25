@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  {% load static %}
+	<h2> Your request has been registered.</h2>
+
+	<p> We'll try to update the book as soon as possible
+	
+	<p> User: <strong>{{user.get_username}}</strong></p>
+	<p> Requested book :<strong> {{ request.book_name }}</strong></p>
+{% endblock %}

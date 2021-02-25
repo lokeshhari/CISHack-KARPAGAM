@@ -1,0 +1,40 @@
+
+{% block title %} <title> {{book.title}}</title>{% endblock %}
+{% block content %}
+
+  <h3>{{ book.title }}</h3>
+
+  <p><strong>Author:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a>
+  <strong style="padding-left:5em;">ISBN:</strong> {{ book.isbn }} 
+  <strong style="padding-left:3em;">Language:</strong> {{ book.langs }}
+  <strong style="padding-left:3em;">Genre:</strong> {{ book.genre.all|join:", " }}
+<br>
+  <strong>Summary:</strong> {{ book.summary }}</p>
+  {% if user.is_authenticated %}
+  <div  style="width: 640px; height: 480px; position: relative;">
+
+      <iframe src="{{ book.file_url }}"   width="640" height="480" frameborder="0" scrolling="no" seamless=""></iframe>
+
+      <div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>
+</div>
+
+  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- Auto width -->
+<button onclick="download()"  class="btn"><i class="fa fa-download"></i> Download</button>
+
+<a id="downloadfile" href="{{ book.download_url }}" download hidden></a>
+<script>
+function download() {
+  document.getElementById('downloadfile').click();
+  
+}
+</script>
+{% else %}
+<p> Please login to access soft copy of this book </p>
+{% endif %}
+  {% if user.is_staff %}<p> <a href="{% url 'book_update' book.pk %}" > Book Update</a> <a style="padding-left:3em;" href="{% url 'book_delete' book.pk %}"> Book Delete </a> {% endif %} 
+  {% endblock %}
